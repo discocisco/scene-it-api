@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-class FavoritesController < ApplicationController
-  before_action :set_favorite, only: %i[show update destroy]
+class FavoritesController < OpenReadController
+  before_action :set_favorite, only: %i[update destroy]
 
   # GET /favorites
   def index
@@ -12,12 +12,12 @@ class FavoritesController < ApplicationController
 
   # GET /favorites/1
   def show
-    render json: @favorite
+    render json: Favorite.find(params[:id])
   end
 
   # POST /favorites
   def create
-    @favorite = Favorite.new(favorite_params)
+    @favorite = current_user.favorites.new(favorite_params)
 
     if @favorite.save
       render json: @favorite, status: :created, location: @favorite
@@ -44,7 +44,7 @@ class FavoritesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_favorite
-    @favorite = Favorite.find(params[:id])
+    @favorite = current_user.favorites.find(params[:id])
   end
 
   # Only allow a trusted parameter "white list" through.
