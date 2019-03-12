@@ -17,7 +17,7 @@ class ReviewsController < OpenReadController
 
   # POST /reviews
   def create
-    @review = current_user.review.new(review_params)
+    @review = current_user.reviews.new(review_params)
 
     if @review.save
       render json: @review, status: :created, location: @review
@@ -44,7 +44,7 @@ class ReviewsController < OpenReadController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_review
-    @review = current_user.review.find(params[:id])
+    @review = current_user.reviews.find(params[:id])
   end
 
   # Only allow a trusted parameter "white list" through.
