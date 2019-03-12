@@ -5,7 +5,7 @@ class FavoritesController < ProtectedController
 
   # GET /favorites
   def index
-    @favorites = current_user.all
+    @favorites = current_user.favorites.all
 
     render json: @favorites
   end
