@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :reviews
-  resources :favorites
+  resources :reviews, except: %i[new edit]
+  resources :favorites, except: %i[new edit]
   resources :movies, except: %i[new edit]
   # RESTful routes
   resources :examples, except: %i[new edit]
