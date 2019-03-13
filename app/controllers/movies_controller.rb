@@ -1,7 +1,22 @@
 # frozen_string_literal: true
 
+require 'httparty'
+
 class MoviesController < ApplicationController
   before_action :set_movie, only: %i[show update destroy]
+
+  # POST Yelp search by location for Movie Theaters
+  def find_theater
+    search_location = params.require(:search)
+    headers = { 'Authorization' => "Bearer #{ENV['YELP_KEY']}" }
+    @res = HTTParty.get(
+      'https://api.yelp.com/v3/businesses/search',
+      headers: headers,
+      query: { term: 'Movie Theater', location: search_location }
+    )
+
+    render json: @res
+  end
 
   # GET /movies
   def index
