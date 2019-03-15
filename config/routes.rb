@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :favorites
   resources :reviews, except: %i[new edit]
   resources :favorites, except: %i[new edit]
-  resources :movies, except: %i[new edit]
+  resources :movies, except: %i[new edit create update destroy]
   # RESTful routes
   resources :examples, except: %i[new edit]
 
