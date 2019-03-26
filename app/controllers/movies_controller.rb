@@ -5,6 +5,14 @@ require 'httparty'
 class MoviesController < ApplicationController
   before_action :set_movie, only: %i[show update destroy]
 
+  def now_playing
+    @res = HTTParty.get(
+      "https://api.themoviedb.org/3/movie/now_playing?api_key=#{ENV['TMDB_KEY']}"
+    )
+
+    render json: @res
+  end
+
   # POST Yelp search by location for Movie Theaters
   def find_theater
     search_location = params.require(:search)

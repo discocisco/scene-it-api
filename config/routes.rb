@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :favorites
   resources :reviews, except: %i[new edit]
   resources :favorites, except: %i[new edit]
-  resources :movies, except: %i[new edit create update destroy]
+  resources :movies, except: %i[new edit update destroy]
   # RESTful routes
   resources :examples, except: %i[new edit]
 
@@ -14,4 +14,5 @@ Rails.application.routes.draw do
   delete '/sign-out' => 'users#signout'
   patch '/change-password' => 'users#changepw'
   post '/find-theater' => 'movies#find_theater'
+  get '/now-playing' => 'movies#now_playing'
 end
