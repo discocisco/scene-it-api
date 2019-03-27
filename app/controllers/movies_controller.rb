@@ -13,6 +13,15 @@ class MoviesController < ApplicationController
     render json: @res
   end
 
+  def search_movie
+    search_movie = params.require(:search)
+    @res = HTTParty.get(
+      "https://api.themoviedb.org/3/search/movie?api_key=#{ENV['TMDB_KEY']}&language=en-US&page=1&include_adult=false&query=#{search_movie}"
+    )
+
+    render json: @res
+  end
+
   # POST Yelp search by location for Movie Theaters
   def find_theater
     search_location = params.require(:search)

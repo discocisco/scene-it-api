@@ -15,4 +15,5 @@ Rails.application.routes.draw do
   patch '/change-password' => 'users#changepw'
   post '/find-theater' => 'movies#find_theater'
   get '/now-playing' => 'movies#now_playing'
+  post '/search-movie' => 'movies#search_movie'
 end
